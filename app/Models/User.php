@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'contact_number',
-        'last_login'
+        'last_login',
     ];
 
     /**
@@ -42,47 +41,65 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password' => 'string',
     ];
 
+    /**
+     * The roles that belong to the user.
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    // Check if a user has a specific role
-    public function hasRole($role)
+    /**
+     * Check if a user has a specific role.
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
     {
         return $this->roles->contains('name', $role);
     }
-//    public function branch()
-//    {
-//        return $this->belongsTo(Branch::class, 'id', 'branch_manager_id');
-//    }
 
+    /**
+     * Get the branch that the user manages.
+     */
     public function managedBranch()
     {
         return $this->hasOne(Branch::class, 'branch_manager_id', 'id');
     }
 
+    /**
+     * The branches that belong to the user.
+     */
     public function branches()
     {
         return $this->belongsToMany(Branch::class, 'branch_user', 'user_id', 'branch_id');
     }
 
+    /**
+     * Get the leads for the user.
+     */
     public function leads()
     {
         return $this->hasMany(Lead::class);
     }
+
+    /**
+     * Get the jobs for the user.
+     */
     public function jobs()
     {
         return $this->hasMany(Job::class);
     }
 
+    /**
+     * Get the executive documents for the user.
+     */
     public function executiveDocuments()
     {
         return $this->hasMany(UserDocument::class);
     }
-
-
 }

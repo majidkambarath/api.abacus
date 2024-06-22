@@ -9,9 +9,7 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name'];
 
     // Define the many-to-many relationship with users
     public function users()
