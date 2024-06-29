@@ -37,32 +37,32 @@ class UserSeeder extends Seeder
             $adminUser->roles()->attach($adminRole);
         }
 
-        // Manager user
-        $managerUser = User::firstOrCreate(
-            ['email' => 'manager@test.com'],
-            [
-                'name' => 'Manager',
-                'password' => Hash::make('1234'),
-            ]
-        );
+        // // Manager user
+        // $managerUser = User::firstOrCreate(
+        //     ['email' => 'manager@test.com'],
+        //     [
+        //         'name' => 'Manager',
+        //         'password' => Hash::make('1234'),
+        //     ]
+        // );
 
-        $managerRole = Role::where('name', 'manager')->first();
-        if ($managerRole && !$managerUser->roles->contains($managerRole->id)) {
-            $managerUser->roles()->attach($managerRole);
-        }
+        // $managerRole = Role::where('name', 'manager')->first();
+        // if ($managerRole && !$managerUser->roles->contains($managerRole->id)) {
+        //     $managerUser->roles()->attach($managerRole);
+        // }
 
-        // Executive user
-        $executiveUser = User::firstOrCreate(
-            ['email' => 'executive@test.com'],
-            [
-                'name' => 'Executive',
-                'password' => Hash::make('1234'),
-            ]
-        );
+        // // Executive user
+        // $executiveUser = User::firstOrCreate(
+        //     ['email' => 'executive@test.com'],
+        //     [
+        //         'name' => 'Executive',
+        //         'password' => Hash::make('1234'),
+        //     ]
+        // );
 
-        $executiveRole = Role::where('name', 'executive')->first();
-        if ($executiveRole && !$executiveUser->roles->contains($executiveRole->id)) {
-            $executiveUser->roles()->attach($executiveRole);
-        }
+        // $executiveRole = Role::where('name', 'executive')->first();
+        // if ($executiveRole && !$executiveUser->roles->contains($executiveRole->id)) {
+        //     $executiveUser->roles()->attach($executiveRole);
+        // }
     }
 }
